@@ -25,9 +25,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = "+_ot#hzd$=+%r^6@v%l--$hte()7ajtgyzt6vsk^&31b$bmrt5"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ["127.0.0.1", "a9a453fa31f8.ngrok.io"]  # "c63993ec2098.ngrok.io"
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -125,6 +125,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = "/static/"
+# STATIC_ROOT = os.path.join(BASE_DIR, "config/static")
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "config/static"),
 ]
