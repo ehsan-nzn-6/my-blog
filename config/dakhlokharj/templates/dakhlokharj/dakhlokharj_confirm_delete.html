@@ -1,0 +1,27 @@
+{% extends 'config/base.html' %}
+{% load widget_tweaks %}
+{% load crispy_forms_tags %}
+
+{% block body %}
+<div class="container my-5">
+    <div class="card p-4 shadow-lg p-5 mb-5 bg-white rounded">
+        <h3 class="mb-2 mt-0">List</h3>
+        <form action="" method="post">{% csrf_token %}
+            <div class="alert alert-danger p-2  mt-4" role="alert">
+                Are you sure you want to delete "{{object.text}}" ?
+            </div>
+
+            <button type="submit" class="btn btn-danger px-4">Yes</button>
+            <a href="{% url 'dakhlokharj:DakhlOKharjList' %}"><button type="button"
+                    class="btn btn-outline-secondary px-4">No</button></a>
+        </form>
+    </div>
+</div>
+
+
+
+
+
+
+
+{% endblock %}

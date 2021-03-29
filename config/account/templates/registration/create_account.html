@@ -1,0 +1,87 @@
+{% extends 'config/base.html' %}
+{% load widget_tweaks %}
+
+{% block body %}
+
+<div class="container my-5">
+    <div class="row">
+        <div class="col">
+            <div class="card p-4 shadow-lg p-3 mb-5 bg-white rounded">
+                <form method="POST">{% csrf_token %}
+                    <h3 class="mb-4">Create New Account</h3>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Username</label>
+                        <!-- <input type="username" name="username" class="form-control" id="exampleInputEmail1"
+                            placeholder="Enter Your Username" aria-describedby="emailHelp" required> -->
+                        {% render_field form.username|add_class:"form-control" placeholder="Enter Your Username" %}
+                        <small id="emailHelp" class="form-text text-muted">~ 150 characters or fewer. Letters, digits
+                            and
+                            @/./+/-/_ only.</small>
+
+                        {% if form.username.errors %}
+                        <div class="alert alert-danger p-2 mt-2" role="alert">
+                            {% for error in form.username.errors %}
+                            <span>{{error}}</span>
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Password</label>
+                        <!-- <input type="password" name="password" class="form-control" placeholder="Enter Your Password"
+                            id="exampleInputPassword1" required> -->
+                        {% render_field form.password1|add_class:"form-control" placeholder="Enter Your Password" %}
+                        <small id="emailHelp" class="form-text text-muted">~ Your password can’t be too similar to your
+                            other
+                            personal information.
+                        </small>
+                        <small id="emailHelp" class="form-text text-muted">~ Your password must contain at least 8
+                            characters.</small>
+                        <small id="emailHelp" class="form-text text-muted">~ Your password can’t be a commonly used
+                            password.</small>
+                        <small id="emailHelp" class="form-text text-muted">~ Your password can’t be entirely
+                            numeric.</small>
+
+                        {% if form.password1.errors %}
+                        <div class="alert alert-danger p-2 mt-2" role="alert">
+                            {% for error in form.password1.errors %}
+                            <span>{{error}}</span>
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Password Confirmation</label>
+                        {% render_field form.password2|add_class:"form-control" placeholder="Re-Enter Your Password" %}
+                        <small id="emailHelp" class="form-text text-muted">~ Enter the same password as before, for
+                            verification.
+                        </small>
+
+                        {% if form.password2.errors %}
+                        <div class="alert alert-danger p-2 mt-2" role="alert">
+                            {% for error in form.password2.errors %}
+                            <span>{{error}}</span>
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+
+                    </div>
+                    <button type="submit" class="btn btn-outline-success my-2" style="width:100%;">Create</button>
+                </form>
+
+                {% if form.non_field_errors %}
+                <div class="alert alert-danger" role="alert">
+                    {% for error in form.non_field_errors %}
+                    <span>{{error}}</span>
+                    {% endfor %}
+                </div>
+                {% endif %}
+
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,94 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'bootstrap/bootstrap.min.css' %}">
+
+    <title>{% block title %}{% endblock %}</title>
+    {% block head %}{% endblock %}
+</head>
+
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container">
+                <a class="navbar-brand" href="#">Hi {{request.user.username}}</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse"
+                    data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item">
+                            <a class="nav-link text-light mx-1 ml-2" href={% url 'home:home' %}>Home<span
+                                    class="sr-only">(current)</span></a>
+                        </li>
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-light mx-1" href="#" id="navbarDropdown"
+                                role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Apps
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href={% url 'dakhlokharj:DakhlOKharjList' %}>Dakhl O Kharj</a>
+                                <a class="dropdown-item" href="#">Another action</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="#">Something else here</a>
+                            </div>
+                        </li>
+
+                        {% if not request.user.username %}
+                        <li class="nav-item">
+                            <a class="nav-link text-success mx-1" href={% url 'account:create-account' %}>Create New
+                                Account</a>
+                        </li>
+                        {% endif %}
+
+                        {% if not request.user.username %}
+                        <li class="nav-item">
+                            <a class="nav-link text-info mx-1" href={% url 'account:login' %}>Log In</a>
+                        </li>
+                        {% endif %}
+
+                        {% if request.user.username %}
+                        <li class="nav-item">
+                            <a class="nav-link text-danger mx-1" href={% url 'account:logout' %}>Log Out</a>
+                        </li>
+                        {% endif %}
+                        <!-- <li class="nav-item">
+                            <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+                        </li>  -->
+                    </ul>
+
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="">
+
+        {% block body %}{% endblock %}
+
+    </main>
+
+    <footer>
+        <hr>
+        <div class=" text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+            <div class="container">
+                © Ehsan
+            </div>
+        </div>
+    </footer>
+    <script src="{% static 'bootstrap/jquery-3.5.1.slim.min.js' %}"></script>
+    <script src="{% static 'bootstrap/bootstrap.bundle.min.js' %}"></script>
+
+
+
+</body>
+
+</html>
