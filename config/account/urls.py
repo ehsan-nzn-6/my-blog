@@ -17,6 +17,6 @@ urlpatterns = [
 ]
 
 urlpatterns += {
-    path('', home, name='home'),
+    path('', ArticleList.as_view(), name='home'),
 
 }
