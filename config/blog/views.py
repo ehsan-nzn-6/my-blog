@@ -7,6 +7,7 @@ from blog.models import Article, Category
 from django.core.paginator import Paginator
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
+from django.contrib.auth.models import User
 
 
 # def home(request, page=1):
@@ -63,4 +64,22 @@ class CategoryList(ListView):
         # add some extra context
         context = super().get_context_data(**kwargs)
         context['category'] = self.category
+        return context
+
+
+class AuthorList(ListView):
+    paginate_by = 3
+    template_name = 'blog/author_list.html'
+
+    def get_queryset(self):
+        # use your custom queryset
+        username = self.kwargs.get('username')
+        self.author = get_object_or_404(
+            User, username=username)
+        return self.author.articles.published()
+
+    def get_context_data(self, **kwargs):
+        # add some extra context
+        context = super().get_context_data(**kwargs)
+        context['author'] = self.author
         return context
