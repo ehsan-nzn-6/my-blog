@@ -7,7 +7,7 @@ from blog.models import Article, Category
 from django.core.paginator import Paginator
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
-from django.contrib.auth.models import User
+from account.models import User
 
 
 # def home(request, page=1):

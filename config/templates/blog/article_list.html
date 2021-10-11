@@ -14,7 +14,7 @@
                 <a href="{% url 'blog:detail' article.slug %}">
                     <h4 class="post-title">{{article.title}}</h4>
                     <h5 class="post-subtitle" style="text-align: justify;
-                    text-justify: inter-word;">{{article.description|truncatewords:30}}</h5>
+                    text-justify: inter-word;">{{article.description|striptags|truncatewords:30}}</h5>
                 </a>
                 <p class="post-meta">
                     نوشته شده توسط

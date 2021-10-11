@@ -1,12 +1,11 @@
 {% extends 'registration/base.html' %}
-{% block title %}
+{% block title %}{% block title-meta %}
 لیست مقالات
-<hr>
-{% endblock %}
+{% endblock %}{% endblock %}
 
 {% block main %}
 <!-- <p>حوش آمدید {{user.get_full_name}}</p> -->
-
+<hr>
 <div class="row">
     <div class="col-12">
         <div class="card">
@@ -41,13 +40,17 @@
                     <tbody>
                         {% for article in object_list %}
                         <tr>
+                            {% if article.status == 'd' or user.is_superuser %}
+                            <td><a href="{% url 'account:article-update' article.pk %}">{{article.title}}</a></td>
+                            {% else %}
                             <td>{{article.title}}</td>
+                            {% endif %}
                             <!-- <td>{{article.slug}}</td> -->
                             <td><img src="{{article.thumbnail.url}}" alt="" srcset="" width="120"></td>
                             <td>{{article.category_to_str}}</td>
                             <td>{{article.author.get_full_name}}</td>
                             <td style="text-align: justify;text-justify: inter-word;">
-                                {{article.description|truncatewords:30}}
+                                {{article.description|striptags|truncatewords:30}}
                             </td>
                             <td>{{article.jpublish}}</td>
                             <td>
