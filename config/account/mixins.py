@@ -7,10 +7,10 @@ class FieldsMixins():
     def dispatch(self, request, *args, **kwargs):
         if request.user.is_superuser:
             self.fields = ('author', 'title', 'slug', 'category',
-                           'description', 'thumbnail', 'publish', 'status')
+                           'description', 'thumbnail', 'publish', 'is_special', 'status')
         elif request.user.is_author:
             self.fields = ('title', 'slug', 'category',
-                           'description', 'thumbnail', 'publish')
+                           'description', 'thumbnail', 'is_special', 'publish')
         else:
             raise Http404
         return super().dispatch(request, *args, **kwargs)
@@ -31,7 +31,16 @@ class AuthorAccessMixins():
     # users cant edit others article
     def dispatch(self, request, pk, *args, **kwargs):
         article = get_object_or_404(Article, pk=pk)
-        if article.author == request.user or request.user.is_superuser or article.status == 'd':
+        if article.author == request.user or request.user.is_superuser or article.status in ['d', 'b']:
+            # goto response
+            return super().dispatch(request, *args, **kwargs)
+        else:
+            raise Http404
+
+
+class SuperuserAccessMixins():
+    def dispatch(self, request, *args, **kwargs):
+        if request.user.is_superuser:
             # goto response
             return super().dispatch(request, *args, **kwargs)
         else:

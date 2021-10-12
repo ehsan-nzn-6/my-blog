@@ -8,7 +8,7 @@ from django.core.paginator import Paginator
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from account.models import User
-
+from account.mixins import AuthorAccessMixins
 
 # def home(request, page=1):
 #     articles_list = Article.objects.published()
@@ -19,6 +19,8 @@ from account.models import User
 #         'articles': articles,
 #     }
 #     return render(request, 'blog/home.html', context)
+
+
 class ArticleList(ListView):
     # model = Article
     # template_name = 'blog/home.html'
@@ -37,6 +39,12 @@ class ArticleDetail(DetailView):
     def get_object(self):
         slug = self.kwargs.get('slug')
         return get_object_or_404(Article.objects.published(), slug=slug)
+
+
+class ArticlePreview(AuthorAccessMixins, DetailView):
+    def get_object(self):
+        pk = self.kwargs.get('pk')
+        return get_object_or_404(Article, pk=pk)
 
 
 # def category(request, slug, page=1):

@@ -17,7 +17,15 @@
                 <div class="col-md-10 col-lg-8 col-xl-7" style="text-align: justify;
                 text-justify: inter-word;">
 
+                    {% if object.is_special %}
+                    {% if user.is_authenticated and user.is_special_user or user == object.author or user.is_superuser%}
                     <p>{{object.description|safe}}</p>
+                    {% else %}
+                    <p>این مقاله ویژه است. برای مشاهده باید <a href="#">اشتراک ویژه</a>
+                        تهیه کنید.</p>
+                    {% endif %}
+                    {% endif %}
+
 
                 </div>
             </div>
