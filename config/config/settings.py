@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'widget_tweaks',
     'crispy_forms',
+    'django_gravatar',
     #
     'blog.apps.BlogConfig',
     'account.apps.AccountConfig',
