@@ -12,7 +12,11 @@
             <!-- Post preview-->
             <div class="post-preview">
                 <a href="{% url 'blog:detail' article.slug %}">
-                    <h4 class="post-title">{{article.title}}</h4>
+                    <h4 class="post-title">{{article.title}}
+                        {% if article.is_special %}
+                        <span class="text-danger badge badge-danger ">ویژه!</span>
+                        {% endif %}
+                    </h4>
                     <h5 class="post-subtitle" style="text-align: justify;
                     text-justify: inter-word;">{{article.description|striptags|truncatewords:30}}</h5>
                 </a>

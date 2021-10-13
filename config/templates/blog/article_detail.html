@@ -2,7 +2,11 @@
 {% block title %}{{object.title}}{% endblock %}
 
 {% block header_topic %}
-<h2>{{object.title}}</h2>
+<h2>{{object.title}}
+    {% if article.is_special %}
+    <span class="text-danger badge badge-danger ">ویژه!</span>
+    {% endif %}
+</h2>
 <time>تاریخ انتشار: {{object.jpublish}}</time>
 {% endblock %}
 
@@ -21,8 +25,10 @@
                     {% if user.is_authenticated and user.is_special_user or user == object.author or user.is_superuser%}
                     <p>{{object.description|safe}}</p>
                     {% else %}
+                    {{article.description|striptags|truncatewords:30}}
                     <p>این مقاله ویژه است. برای مشاهده باید <a href="#">اشتراک ویژه</a>
                         تهیه کنید.</p>
+
                     {% endif %}
                     {% endif %}
 

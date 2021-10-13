@@ -31,17 +31,28 @@
                     </div>
                     <div class="col-6">
                         {{form.thumbnail|as_crispy_field}}
+                    </div>
+                    <div class="col-6">
                         {{form.publish|as_crispy_field}}
                     </div>
                     {% if user.is_superuser %}
                     <div class="col-6">
                         {{form.author|as_crispy_field}}
-                        {{form.is_special|as_crispy_field}}
                     </div>
                     <div class="col-6">
                         {{form.status|as_crispy_field}}
                     </div>
+                    {% else %}
+                    <select name="status" class="select form-control" required="" id="id_status">
+                        <option value="">---------</option>
+                        <option value="d">پیش نویس</option>
+                        <option value="i">ارسال برای تایید</option>
+                    </select>
                     {% endif %}
+                    <div class="col-6">
+                        {{form.is_special|as_crispy_field}}
+
+                    </div>
                 </div>
             </div>
             <div class="card-footer">

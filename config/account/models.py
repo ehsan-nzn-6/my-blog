@@ -1,9 +1,11 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from django.db.models.fields import EmailField
 from django.utils import timezone
 
 
 class User(AbstractUser):
+    email = models.EmailField(unique=True, verbose_name='ایمیل')
     is_author = models.BooleanField(
         default=False, verbose_name='وضعیت نویسنده')
     special_user = models.DateTimeField(
