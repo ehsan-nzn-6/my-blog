@@ -1,4 +1,6 @@
 {% extends 'blog/base.html' %}
+{% load comment_tags %}
+
 {% block title %}{{object.title}}{% endblock %}
 
 {% block header_topic %}
@@ -31,9 +33,11 @@
 
                     {% endif %}
                     {% endif %}
-
+                    {% render_comments object request %}
+                    {% include_bootstrap %}
 
                 </div>
+
             </div>
         </div>
     </article>

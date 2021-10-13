@@ -4,6 +4,8 @@ from django.utils import timezone
 from extensions.utils import datetime_to_shamsi
 from django.utils.html import format_html
 from account.models import User
+from django.contrib.contenttypes.fields import GenericRelation
+from comment.models import Comment
 
 
 class CategoryManager(models.Manager):
@@ -62,6 +64,7 @@ class Article(models.Model):
         default=False, verbose_name='مقاله ویژه')
     status = models.CharField(
         max_length=1, choices=STATUS_CHOICES, verbose_name='وضعیت')
+    comments = GenericRelation(Comment)
 
     def jpublish(self):
         output = datetime_to_shamsi(self.publish)

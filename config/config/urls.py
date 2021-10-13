@@ -12,6 +12,7 @@ urlpatterns = [
     path('login/', LoginView.as_view(), name='login'),
     path('register/', Register.as_view(), name='register'),
     path('activate/<uidb64>/<token>/', activate, name='activate'),
+    path('comment/', include('comment.urls')),
 
 ]
 
