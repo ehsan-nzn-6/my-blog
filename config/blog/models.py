@@ -39,6 +39,10 @@ class ArticleManager(models.Manager):
         return self.filter(status='p')
 
 
+class IPAddress(models.Model):
+    ip_address = models.GenericIPAddressField(verbose_name='آدرس آیپی')
+
+
 class Article(models.Model):
     STATUS_CHOICES = (
         ('d', 'پیش نویس'),
@@ -65,6 +69,8 @@ class Article(models.Model):
     status = models.CharField(
         max_length=1, choices=STATUS_CHOICES, verbose_name='وضعیت')
     comments = GenericRelation(Comment)
+    hits = models.ManyToManyField(
+        IPAddress, blank=True, related_name='hits', verbose_name='بازدید ها')
 
     def jpublish(self):
         output = datetime_to_shamsi(self.publish)
