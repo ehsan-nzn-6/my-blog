@@ -90,3 +90,14 @@ body{
     display: block !important;
 }
 /* NAVBAR SUBMENUS */
+
+.popular-articles{
+    border: 1px solid #bfbfbf;
+    padding: 15px;
+    border-radius: 5px;
+    width: 240px;
+    /* position:absolute; */
+    left: 240px;
+    top: 0;
+    box-shadow: -5px 5px #d5d5d5;
+}

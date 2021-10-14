@@ -35,7 +35,7 @@
                     <p>{{object.description|safe}}</p>
                     {% else %}
                     {{article.description|striptags|truncatewords:30}}
-                    <p>این مقاله ویژه است. برای مشاهده باید <a href="#">اشتراک ویژه</a>
+                    <p class="alert alert-danger">این مقاله ویژه است. برای مشاهده باید <a href="#">اشتراک ویژه</a>
                         تهیه کنید.</p>
 
                     {% endif %}

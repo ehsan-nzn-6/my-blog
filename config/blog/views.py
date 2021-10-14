@@ -3,7 +3,7 @@ from django.db import models
 from django.http.response import HttpResponse
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
-from blog.models import Article, Category
+from blog.models import Article, ArticleHit, Category
 from django.core.paginator import Paginator
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView

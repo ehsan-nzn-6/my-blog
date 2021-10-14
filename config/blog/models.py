@@ -70,7 +70,7 @@ class Article(models.Model):
         max_length=1, choices=STATUS_CHOICES, verbose_name='وضعیت')
     comments = GenericRelation(Comment)
     hits = models.ManyToManyField(
-        IPAddress, blank=True, related_name='hits', verbose_name='بازدید ها')
+        IPAddress, through='ArticleHit', blank=True, related_name='hits', verbose_name='بازدید ها')
 
     def jpublish(self):
         output = datetime_to_shamsi(self.publish)
@@ -100,3 +100,9 @@ class Article(models.Model):
         return self.title
 
     objects = ArticleManager()
+
+
+class ArticleHit(models.Model):
+    article = models.ForeignKey(Article, on_delete=models.CASCADE)
+    ip_address = models.ForeignKey(IPAddress, on_delete=models.CASCADE)
+    created = models.DateTimeField(auto_now_add=True)
