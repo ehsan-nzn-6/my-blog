@@ -9,7 +9,7 @@ from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from account.models import User
 from account.mixins import AuthorAccessMixins
-
+from django.db.models import Q
 # def home(request, page=1):
 #     articles_list = Article.objects.published()
 #     paginator = Paginator(articles_list, 5)
@@ -96,4 +96,20 @@ class AuthorList(ListView):
         # add some extra context
         context = super().get_context_data(**kwargs)
         context['author'] = self.author
+        return context
+
+
+class SearchList(ListView):
+    paginate_by = 1
+    template_name = 'blog/search_list.html'
+
+    def get_queryset(self):
+        # use your custom queryset
+        search = self.request.GET.get('q')
+        return Article.objects.filter(Q(description__icontains=search) | Q(title__icontains=search))
+
+    def get_context_data(self, **kwargs):
+        # add some extra context
+        context = super().get_context_data(**kwargs)
+        context['search'] = self.request.GET.get('q')
         return context

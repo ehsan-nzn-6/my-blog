@@ -14,5 +14,24 @@
         </li>
         {% endif %}
         {% endfor %}
+        <li class="nav-item  px-lg-3 py-3 py-lg-4">
+
+            <form class="form-inline mt-3" action="{% url 'blog:search'  %}">
+
+
+                <input type="text" name="q" class="form-control m-0" placeholder="جستجو ...">
+
+
+                <button type="submit" class="btn btn-success btn-block p-3" hidden>جستجو</button>
+
+
+            </form>
+
+        </li>
+
+
+
     </ul>
+
+
 </div>

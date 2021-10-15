@@ -1,48 +1,36 @@
 {% extends 'blog/base.html' %}
-{% load base_tags %}
 {% block main %}
-{% load ratings %}
-{% load humanize %}
+
 
 <!-- Main Content-->
 <div class="container px-4 px-lg-5">
     <div class="row gx-4 gx-lg-5 justify-content-center">
-        {% popular_articles %}
         <div class="col-md-10 col-lg-8 col-xl-7">
-
+            <h3 class="alert alert-primary text-center">جستجو: {{search}}</h3>
             {% for article in object_list %}
 
             <!-- Post preview-->
             <div class="post-preview">
                 <a href="{% url 'blog:detail' article.slug %}">
-                    <h4 class="post-title">{{article.title}}
-                        {% if article.is_special %}
-                        <span class="text-danger badge badge-danger ">ویژه!</span>
-                        {% endif %}
-                    </h4>
-                    <div class="mt-3">
-                        {% ratings article %}
-                    </div>
-                    <h5 class="post-subtitle" style="text-align: justify;
-                    text-justify: inter-word;">{{article.description|striptags|truncatewords:30}}</h5>
+                    <h2 class="post-title">{{article.title}}</h2>
+                    <h3 class="post-subtitle">{{article.description|striptags|truncatewords:30}}</h3>
                 </a>
                 <p class="post-meta">
                     نوشته شده توسط
                     <a href="{% url 'blog:author' article.author %}">{{article.author.get_full_name}}</a>
-                    <time>{{article.publish|naturaltime}}</time>
+                    {{article.jpublish}}
                 </p>
                 <div>
-                    {% for cat in article.category_published.all %}
+                    {% for cat in article.category.active %}
                     <a href="{% url 'blog:category' cat.slug %}">#{{cat.title}}</a>
                     {% endfor %}
-                </div>
-                <div class="mt-3">
-                    بازدید ها: {{ article.hits.count }}
                 </div>
             </div>
             <!-- Divider-->
             <hr class="my-4" />
 
+            {% empty %}
+            <p class="alert alert-warning">متاسفانه محتوایی برای نمایش وجود ندارد!</p>
             {% endfor %}
             <!-- Pager-->
             {% if is_paginated %}
@@ -50,7 +38,8 @@
                 <div class="col-4">
                     {% if page_obj.has_previous %}
                     <div class="d-flex mb-4"><a class="btn btn-primary text-uppercase p-3"
-                            href="{% url 'blog:home' page_obj.previous_page_number %}">&rarr; پست
+                            href="{% url 'blog:search' page_obj.previous_page_number %}?q={{search}}">&rarr;
+                            پست
                             های
                             جدید تر </a></div>
                     {% endif %}
@@ -59,13 +48,14 @@
                 <div class="col-4">
                     {% if page_obj.has_next %}
                     <div class="d-flex justify-content-end mb-4"><a class="btn btn-primary text-uppercase p-3"
-                            href="{% url 'blog:home' page_obj.next_page_number %}">پست
+                            href="{% url 'blog:search' page_obj.next_page_number %}?q={{search}}">پست
                             های
                             قدیمی تر &larr;</a></div>
                     {% endif %}
                 </div>
             </div>
             {% endif %}
+
         </div>
     </div>
 </div>

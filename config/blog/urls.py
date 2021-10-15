@@ -13,6 +13,7 @@ urlpatterns = [
     path('author/<slug:username>', AuthorList.as_view(), name='author'),
     path('author/<slug:username>/page/<int:page>',
          AuthorList.as_view(), name='author'),
-
-
+    path('search/', SearchList.as_view(), name='search'),
+    path('search/page/<int:page>/',
+         SearchList.as_view(), name='search'),
 ]
