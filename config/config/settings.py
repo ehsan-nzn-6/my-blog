@@ -135,10 +135,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
-# STATIC_ROOT = BASE_DIR / 'static' # its for collect static. its use lib statics
-STATICFILES_DIRS = [  # its use local statics
-    BASE_DIR / 'static',
-]
+STATIC_ROOT = BASE_DIR / 'static'  # its for collect static. its use lib statics
+# STATICFILES_DIRS = [  # its use local statics
+#     BASE_DIR / 'static',
+# ]
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
@@ -171,5 +171,5 @@ SOCIAL_AUTH_URL_NAMESPACE = 'social'
 # LOGIN_URL = '/auth/login/google-oauth2/'
 # LOGIN_REDIRECT_URL = '/manage/'
 # LOGOUT_REDIRECT_URL = '/'
-SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '883983619899-6fsubooerkc9ptl6alch7c5t6vnerl5k.apps.googleusercontent.com'
-SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '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'
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = config('OAUTH_KEY')
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = config('OAUTH_SECRET')
