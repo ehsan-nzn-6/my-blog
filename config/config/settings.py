@@ -47,6 +47,8 @@ INSTALLED_APPS = [
     'comment',
     'star_ratings',
     'django.contrib.humanize',
+    'social_django',
+
     #
     'blog.apps.BlogConfig',
     'account.apps.AccountConfig',
@@ -158,3 +160,16 @@ EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
 
 
 STAR_RATINGS_STAR_HEIGHT = 20
+
+
+AUTHENTICATION_BACKENDS = (
+    'social_core.backends.google.GoogleOAuth2',
+    'django.contrib.auth.backends.ModelBackend',
+)
+SOCIAL_AUTH_URL_NAMESPACE = 'social'
+
+# LOGIN_URL = '/auth/login/google-oauth2/'
+# LOGIN_REDIRECT_URL = '/manage/'
+# LOGOUT_REDIRECT_URL = '/'
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '883983619899-6fsubooerkc9ptl6alch7c5t6vnerl5k.apps.googleusercontent.com'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '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'

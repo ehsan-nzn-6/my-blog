@@ -90,14 +90,19 @@
 					<a href="{% url 'register' %}" class="my-font">ثبت نام کنید.</a>
 					<br>
 					<a href="{% url 'password_reset' %}" class="my-font">فراموشی گذرواژه</a>
-
+					<button class="btn btn-light rounded my-font"
+						style="right: 90px; position:relative; color: aliceblue !important;">
+						<a href="{% url 'social:begin' 'google-oauth2' %}">اتصال با گوگل</a>
+					</button>
 					<div class="container-login100-form-btn">
 						<div class="wrap-login100-form-btn">
 							<div class="login100-form-bgbtn"></div>
 							<button class="login100-form-btn my-font">
 								ورود
 							</button>
+
 						</div>
+
 					</div>
 
 					<!-- <div class="text-center p-t-115">

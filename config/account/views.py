@@ -8,7 +8,7 @@ from django.contrib.sites.shortcuts import get_current_site
 from .forms import SignupForm
 from django.contrib.auth import login, authenticate
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
+from django.http import HttpResponse, request
 from django.db import models
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
